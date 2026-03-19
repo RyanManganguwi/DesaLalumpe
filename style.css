@@ -235,15 +235,3 @@ footer {
         flex-direction: column; /* Menu baris berbaris ke bawah */
         gap: 10px;
     }
-}
-/* --- Responsif: Tampilan Layar Kecil (Mobile / Tablet) --- */
-@media (max-width: 768px) {
-    /* ... (kode responsif lainnya yang sudah ditambahkan sebelumnya) ... */
-
-    /* Menghilangkan bagian Struktur Organisasi di Mobile */
-    .struktur-organisasi {
-        display: none;
-    }
-
-    /* ... (kode responsif lainnya) ... */
-}
