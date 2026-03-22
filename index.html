@@ -7,6 +7,24 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <div class="logo">Desa Lalumpe</div>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="#beranda">Beranda</a></li>
+                <li><a href="#informasi">Informasi</a></li>
+                <li><a href="#aparatur">Aparatur</a></li>
+                <li><a href="#statistik">Statistik</a></li>
+            </ul>
+        </nav>
+    </header>
     <section id="beranda" class="hero">
         <h1>Selamat Datang di Desa Lalumpe</h1>
         <p>Membangun masyarakat yang mandiri, sejahtera, dan berdaya saing dengan semangat gotong royong.</p>
@@ -138,6 +156,21 @@ Dapatkan berita terbaru mengenai kegiatan pemerintah desa, pengumuman publik </p
             <a href="madeby.html">Made By</a>
         </div>
     </footer>
+<script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
 
+        // Fungsi untuk membuka/menutup menu saat hamburger diklik
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Opsional: Menutup menu otomatis jika salah satu link diklik (bagus untuk mobile)
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>

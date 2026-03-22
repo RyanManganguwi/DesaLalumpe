@@ -6,6 +6,7 @@ body {
     color: #333; 
     line-height: 1.6; 
     background-color: #f9f9f9; 
+    overflow-x: hidden; /* Mencegah scroll menyamping */
 }
 a { 
     text-decoration: none; 
@@ -15,7 +16,9 @@ h1, h2, h3, h4 {
     color: #2c3e50; 
 }
 
-/* Navigasi */
+/* =========================================
+   NAVIGASI (DESKTOP & DASAR)
+   ========================================= */
 header { 
     background-color: #fff; 
     padding: 15px 50px; 
@@ -25,25 +28,80 @@ header {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
     position: sticky; 
     top: 0; 
-    z-index: 100; 
+    z-index: 1000; 
 }
 .logo { 
     font-size: 24px; 
     font-weight: bold; 
     color: #e74c3c; 
 }
-nav ul { 
+.nav-menu ul { 
     list-style: none; 
     margin: 0; 
     padding: 0; 
     display: flex; 
     gap: 20px; 
 }
-nav a:hover { 
+.nav-menu a {
+    font-weight: 500;
+    transition: color 0.3s;
+}
+.nav-menu a:hover { 
     color: #e74c3c; 
 }
 
-/* Hero Section - PERBAIKAN: Koma dan Kurung sudah ditambahkan */
+/* Sembunyikan tombol hamburger di layar besar (Laptop/PC) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+.menu-toggle .bar {
+    height: 3px;
+    width: 25px;
+    background-color: #2c3e50;
+    margin: 4px 0;
+    transition: 0.3s ease;
+}
+
+/* =========================================
+   RESPONSIF KHUSUS NAVIGASI (MOBILE)
+   ========================================= */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px; /* Kurangi padding di HP */
+        flex-direction: row; /* Tetap sejajar kiri-kanan */
+    }
+
+    /* Tampilkan tombol Hamburger */
+    .menu-toggle {
+        display: flex; 
+    }
+
+    /* Modifikasi posisi menu agar bisa disembunyikan/ditampilkan */
+    .nav-menu {
+        position: absolute;
+        top: 60px; /* Muncul tepat di bawah header */
+        left: -100%; /* Sembunyikan di luar layar kiri */
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: left 0.3s ease; /* Animasi geser yang halus */
+    }
+
+    /* Class 'active' ini akan ditambahkan lewat JavaScript saat diklik */
+    .nav-menu.active {
+        left: 0; 
+    }
+
+    .nav-menu ul {
+        flex-direction: column; /* Menu berjejer ke bawah */
+        text-align: center;
+        padding: 20px 0;
+        gap: 15px;
+    }
+}
+/* Hero Section */
 .hero { 
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/lalumpe2.jpg') center/cover no-repeat; 
     color: white; 
@@ -100,7 +158,8 @@ nav a:hover {
     border-radius: 8px; 
     box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
     transition: transform 0.3s; 
-    text-align: center; /* Membuat semua teks di dalam kartu rata tengah */
+    text-align: center; 
+    box-sizing: border-box; /* Memastikan padding tidak menambah lebar kartu */
 }
 .card:hover { 
     transform: translateY(-5px); 
@@ -165,21 +224,70 @@ footer {
 }
 .pimpinan-grid .card {
     min-width: 300px;
+    flex: 1; /* Membuat kartu fleksibel */
 }
 .highlight-card {
     border-top: 5px solid #e74c3c;
     background-color: #fffdfd;
 }
 
-/* Responsif */
+/* =========================================
+   RESPONSIF - Penyesuaian untuk Layar Mobile
+   ========================================= */
 @media (max-width: 768px) {
+    /* Header & Navigasi */
     header {
         flex-direction: column;
         padding: 15px 20px;
     }
-    nav { margin-top: 15px; }
-    nav ul { gap: 10px 20px; justify-content: center; }
-    .hero h1 { font-size: 2.2em; }
-    .hero p { font-size: 1.1em; }
-    .grid { grid-template-columns: 1fr; }
+    nav { 
+        margin-top: 15px; 
+        width: 100%;
+    }
+    nav ul { 
+        gap: 15px; 
+        justify-content: center; 
+        flex-wrap: wrap; /* Mencegah menu terpotong */
+    }
+
+    /* Hero Section (Banner Utama) */
+    .hero { 
+        padding: 40px 15px; 
+        min-height: 40vh; /* Mengurangi ruang kosong di HP */
+    }
+    .hero h1 { 
+        font-size: 2.2em; /* Mengecilkan teks judul utama */
+    }
+    .hero p { 
+        font-size: 1.1em; 
+    }
+
+    /* Container & Judul Bagian */
+    .container {
+        margin: 30px auto; /* Mengurangi margin antar section */
+    }
+    .section-title {
+        font-size: 1.6em;
+        margin-bottom: 25px;
+    }
+
+    /* Grid & Kartu */
+    .grid { 
+        grid-template-columns: 1fr; /* Memaksa semua kartu menjadi 1 kolom sejajar ke bawah */
+        gap: 15px;
+    }
+    .pimpinan-grid {
+        flex-direction: column; /* Mengubah baris pimpinan menjadi kolom */
+    }
+    .pimpinan-grid .card {
+        min-width: 100%; /* Mencegah kartu pimpinan bocor keluar layar */
+    }
+
+    /* Statistik */
+    .stats {
+        padding: 30px 15px;
+    }
+    .stat-item h2 {
+        font-size: 2.5em; /* Mengecilkan angka agar pas di layar */
+    }
 }
